@@ -39,8 +39,8 @@ def test_message():
     testMessageButton["url"] = "http://211.249.49.198"
 
     testMessage["text"] = requestStr
-    testMessage["photo"] = testPhoto
-    # testMessage["message_button"] = testMessageButton
+    # testMessage["photo"] = testPhoto
+    testMessage["message_button"] = testMessageButton
 
     testKeyboardResponse = {}
     testKeyboardResponse["type"] = "buttons"
