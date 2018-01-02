@@ -23,6 +23,8 @@ def test_keyboard():
 def test_message():
     requestJsonData = request.get_json(silent=True)
 
+    requestStr = "user key: " + requestJsonData["user_key"] + " content: " + requestJsonData["content"] + " type: " + requestJsonData["type"]
+
     testResponse = {}
 
     testMessage = {}
@@ -36,7 +38,7 @@ def test_message():
     testMessageButton["label"] = "Label button"
     testMessageButton["url"] = "http://211.249.49.198"
 
-    testMessage["text"] = str(requestJsonData)
+    testMessage["text"] = requestStr
     testMessage["photo"] = testPhoto
     testMessage["message_button"] = testMessageButton
 
