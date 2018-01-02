@@ -47,7 +47,7 @@ def test_message():
     testKeyboardResponse["buttons"] = ["select 1", "select 2", "select 3"]
 
     testResponse["message"] = testMessage
-    # testResponse["keyboard"] = testKeyboardResponse
+    testResponse["keyboard"] = testKeyboardResponse
 
     jsonResponse = json.dumps(testResponse)
 
