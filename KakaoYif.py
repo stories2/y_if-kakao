@@ -50,7 +50,15 @@ def test_message():
     testResponse["keyboard"] = testKeyboardResponse
 
     jsonResponse = json.dumps(testResponse)
-    return jsonResponse
+
+
+    response = app.response_class(
+        response=jsonResponse,
+        status=200,
+        mimetype='application/json'
+    )
+
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6100, threaded=True)
