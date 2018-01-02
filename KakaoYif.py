@@ -39,15 +39,15 @@ def test_message():
     testMessageButton["url"] = "http://211.249.49.198"
 
     testMessage["text"] = requestStr
-    testMessage["photo"] = testPhoto
-    testMessage["message_button"] = testMessageButton
+    # testMessage["photo"] = testPhoto
+    # testMessage["message_button"] = testMessageButton
 
     testKeyboardResponse = {}
     testKeyboardResponse["type"] = "buttons"
     testKeyboardResponse["buttons"] = ["select 1", "select 2", "select 3"]
 
     testResponse["message"] = testMessage
-    testResponse["keyboard"] = testKeyboardResponse
+    # testResponse["keyboard"] = testKeyboardResponse
 
     jsonResponse = json.dumps(testResponse)
 
