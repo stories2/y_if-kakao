@@ -102,5 +102,27 @@ def test_bye(user_key = None):
     )
     return response
 
+@app.route('/chat_room/<user_key>', methods=['DELETE'])
+def test_seeya(user_key = None):
+
+    testResponse = {}
+
+    testMessage = {}
+    if user_key != None:
+        testMessage["text"] = "See ya, " + user_key
+    else:
+        testMessage["text"] = "See ya, anonymous"
+
+    testResponse["message"] = testMessage
+
+    jsonResponse = json.dumps(testResponse)
+
+    response = app.response_class(
+        response=jsonResponse,
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6100, threaded=True)
