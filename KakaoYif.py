@@ -31,15 +31,15 @@ def test_message():
 
     testPhoto = {}
     testPhoto["url"] = "http://211.249.49.198/profile.png"
-    # testPhoto["width"] = "512"
-    # testPhoto["height"] = "515"
+    testPhoto["width"] = "512"
+    testPhoto["height"] = "515"
 
     testMessageButton = {}
     testMessageButton["label"] = "Label button"
     testMessageButton["url"] = "http://211.249.49.198"
 
     testMessage["text"] = requestStr
-    testMessage["photo"] = testPhoto
+    # testMessage["photo"] = testPhoto
     testMessage["message_button"] = testMessageButton
 
     testKeyboardResponse = {}
