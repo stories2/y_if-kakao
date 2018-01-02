@@ -60,5 +60,47 @@ def test_message():
 
     return response
 
+@app.route('/friend', methods=['POST'])
+def test_friend():
+    requestJsonData = request.get_json(silent=True)
+
+    testResponse = {}
+
+    testMessage = {}
+    testMessage["text"] = "Hello, " + requestJsonData["user_key"]
+
+    testResponse["message"] = testMessage
+
+    jsonResponse = json.dumps(testResponse)
+
+    response = app.response_class(
+        response=jsonResponse,
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
+@app.route('/friend/<user_key>', methods=['DELETE'])
+def test_bye(user_key = None):
+
+    testResponse = {}
+
+    testMessage = {}
+    if user_key != None:
+        testMessage["text"] = "Bye, " + user_key
+    else:
+        testMessage["text"] = "Bye, anonymous"
+
+    testResponse["message"] = testMessage
+
+    jsonResponse = json.dumps(testResponse)
+
+    response = app.response_class(
+        response=jsonResponse,
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6100, threaded=True)
