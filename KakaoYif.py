@@ -125,4 +125,4 @@ def test_seeya(user_key = None):
     return response
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=6100, threaded=True)
+    app.run(host='0.0.0.0', threaded=True)

@@ -1,0 +1,10 @@
+[source]
+
+[Unit]
+Description=uWSGI instance to serve KakoYif app
+After=network.target
+
+[Service]
+User=stories2
+Group=www-data
+WorkingDirectory=$HOME/y_if-kakao
