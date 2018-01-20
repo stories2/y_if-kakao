@@ -40,7 +40,7 @@ def test_message():
 
     testMessage["text"] = requestStr
     # testMessage["photo"] = testPhoto
-    testMessage["message_button"] = testMessageButton
+    # testMessage["message_button"] = testMessageButton
 
     testKeyboardResponse = {}
     testKeyboardResponse["type"] = "buttons"
