@@ -31,3 +31,9 @@ setgid www-data
 
 exec uwsgi -s /home/stories2/y_if-kakao/yif.sock -w wsgi:app --http-processes=4 --chmod-socket=666 --master &
 ```
+
+## Service logs
+
+```
+sudo tail -f /var/log/nginx/<access.log> or <error.log>
+```
