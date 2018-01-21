@@ -78,15 +78,16 @@ def test_seeya(user_key = None):
 
 @app.route('/slack/message', methods=['POST'])
 def test_slack():
-    userName = request.form.get('user_name') or ""
-    channelName = request.form.get('channel_name') or ""
-    channelId = request.form.get('channel_id') or ""
-    text = request.form.get('text') or ""
+    requestJsonData = request.get_json(silent = True)
+    userName = requestJsonData['user_name']
+    channelName = requestJsonData['channel_name']
+    channelId = requestJsonData['channel_id']
+    text = requestJsonData['text']
 
     testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
     slack = Slacker(DefineManager.SLACK_TOKEN)
-    slack.chat.post_message('#' + channelName, text = None, attachments = testResponse, as_user = True)
+    slack.chat.post_message('#' + channelName, text = None, attachments = [testResponse])
     return Response(), 200
 
 
