@@ -1,9 +1,14 @@
 from flask import Flask
 import json
-from flask import request
+import os
+from flask import request, Response
+from slackclient import SlackClient
 
 app = Flask(__name__)
 
+SLACK_WEBHOOK_SECRET = os.environ.get('8e23552da51db70dd79b4821bc28d23e')
+SLACK_TOKEN = os.environ.get('uKGV47cuTtA1eGDxjuRTbaNk')
+slackClient = SlackClient(SLACK_TOKEN)
 
 @app.route('/')
 def hello_world():
@@ -123,6 +128,16 @@ def test_seeya(user_key = None):
         mimetype='application/json'
     )
     return response
+
+@app.route('/slack/message', methods=['POST'])
+def test_slack():
+    userName = request.form.get('user_name')
+    channelName = request.form.get('channel_name')
+    channelId = request.form.get('channel_id')
+    text = request.form.get('text')
+    slackClient.api_call('chat.postMessage', channel = channelId, text = text, userName = 'test')
+    return Response(), 200
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', threaded=True)
