@@ -6,8 +6,8 @@ from slackclient import SlackClient
 
 app = Flask(__name__)
 
-SLACK_WEBHOOK_SECRET = os.environ.get('8e23552da51db70dd79b4821bc28d23e')
-SLACK_TOKEN = os.environ.get('uKGV47cuTtA1eGDxjuRTbaNk')
+SLACK_WEBHOOK_SECRET = os.environ.get('Sxn1Qdkv67S0LvyQtlscINkP')
+SLACK_TOKEN = os.environ.get('xoxb-302203814914-4wGFVVT6T9HxGgaPWzKk2pl7')
 slackClient = SlackClient(SLACK_TOKEN)
 
 @app.route('/')
