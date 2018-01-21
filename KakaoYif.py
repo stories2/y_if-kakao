@@ -78,11 +78,10 @@ def test_seeya(user_key = None):
 
 @app.route('/slack/message', methods=['POST'])
 def test_slack():
-    requestJsonData = request.get_json(silent = True)
-    userName = requestJsonData['user_name']
-    channelName = requestJsonData['channel_name']
-    channelId = requestJsonData['channel_id']
-    text = requestJsonData['text']
+    userName = request.form.get('user_name')
+    channelName = request.form.get('channel_name')
+    channelId = request.form.get('channel_id')
+    text = request.form.get('text')
 
     testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
