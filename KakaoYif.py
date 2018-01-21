@@ -14,9 +14,7 @@ def hello_world():
 @app.route('/keyboard', methods=['GET'])
 def test_keyboard():
 
-    testResponse = {}
-    testResponse["type"] = "buttons"
-    testResponse["buttons"] = ["select 1", "select 2", "select 3"]
+    testResponse = KakaoManager.InitKeyboard()
 
     jsonResponse = json.dumps(testResponse)
     return jsonResponse
@@ -25,34 +23,9 @@ def test_keyboard():
 def test_message():
     requestJsonData = request.get_json(silent=True)
 
-    requestStr = "user key: " + requestJsonData["user_key"] + " content: " + requestJsonData["content"] + " type: " + requestJsonData["type"]
-
-    testResponse = {}
-
-    testMessage = {}
-
-    testPhoto = {}
-    testPhoto["url"] = "http://211.249.49.198/profile.png"
-    testPhoto["width"] = "512"
-    testPhoto["height"] = "515"
-
-    testMessageButton = {}
-    testMessageButton["label"] = "Label button"
-    testMessageButton["url"] = "http://211.249.49.198"
-
-    testMessage["text"] = requestStr
-    # testMessage["photo"] = testPhoto
-    # testMessage["message_button"] = testMessageButton
-
-    testKeyboardResponse = {}
-    testKeyboardResponse["type"] = "buttons"
-    testKeyboardResponse["buttons"] = ["select 1", "select 2", "select 3"]
-
-    testResponse["message"] = testMessage
-    testResponse["keyboard"] = testKeyboardResponse
+    testResponse = KakaoManager.MessageReceived(requestJsonData["user_key"], requestJsonData["content"], requestJsonData["type"])
 
     jsonResponse = json.dumps(testResponse)
-
 
     response = app.response_class(
         response=jsonResponse,
@@ -66,12 +39,7 @@ def test_message():
 def test_friend():
     requestJsonData = request.get_json(silent=True)
 
-    testResponse = {}
-
-    testMessage = {}
-    testMessage["text"] = "Hello, " + requestJsonData["user_key"]
-
-    testResponse["message"] = testMessage
+    testResponse = KakaoManager.HelloNewFriend(requestJsonData["user_key"])
 
     jsonResponse = json.dumps(testResponse)
 
@@ -84,16 +52,7 @@ def test_friend():
 
 @app.route('/friend/<user_key>', methods=['DELETE'])
 def test_bye(user_key = None):
-
-    testResponse = {}
-
-    testMessage = {}
-    if user_key != None:
-        testMessage["text"] = "Bye, " + user_key
-    else:
-        testMessage["text"] = "Bye, anonymous"
-
-    testResponse["message"] = testMessage
+    testResponse = KakaoManager.DeleteFriend(user_key)
 
     jsonResponse = json.dumps(testResponse)
 
@@ -106,16 +65,7 @@ def test_bye(user_key = None):
 
 @app.route('/chat_room/<user_key>', methods=['DELETE'])
 def test_seeya(user_key = None):
-
-    testResponse = {}
-
-    testMessage = {}
-    if user_key != None:
-        testMessage["text"] = "See ya, " + user_key
-    else:
-        testMessage["text"] = "See ya, anonymous"
-
-    testResponse["message"] = testMessage
+    testResponse = KakaoManager.LeftFromChatRoom(user_key)
 
     jsonResponse = json.dumps(testResponse)
 
@@ -133,11 +83,10 @@ def test_slack():
     channelId = request.form.get('channel_id')
     text = request.form.get('text')
 
-    SlackManager.MessageReceived(userName, channelName, channelId, text)
+    testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
     slack = Slacker(DefineManager.SLACK_TOKEN)
-    slack.chat.post_message('#' + channelName, 'userName: ' + userName + ' channelName: ' + channelName +
-                                        ' channelId: ' + channelId + ' text: ' + text)
+    slack.chat.post_message('#' + channelName, text = None, attachments = testResponse, as_user = True)
     return Response(), 200
 
 
