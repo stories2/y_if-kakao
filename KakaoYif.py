@@ -23,7 +23,7 @@ def test_keyboard():
 def test_message():
     requestJsonData = request.get_json(silent=True)
 
-    testResponse = KakaoManager.MessageReceived(requestJsonData["user_key"], requestJsonData["content"], requestJsonData["type"])
+    testResponse = KakaoManager.MessageReceived(requestJsonData["user_key"] or "", requestJsonData["content"] or "", requestJsonData["type"] or "")
 
     jsonResponse = json.dumps(testResponse)
 
@@ -39,7 +39,7 @@ def test_message():
 def test_friend():
     requestJsonData = request.get_json(silent=True)
 
-    testResponse = KakaoManager.HelloNewFriend(requestJsonData["user_key"])
+    testResponse = KakaoManager.HelloNewFriend(requestJsonData["user_key"] or "")
 
     jsonResponse = json.dumps(testResponse)
 
@@ -52,7 +52,7 @@ def test_friend():
 
 @app.route('/friend/<user_key>', methods=['DELETE'])
 def test_bye(user_key = None):
-    testResponse = KakaoManager.DeleteFriend(user_key)
+    testResponse = KakaoManager.DeleteFriend(user_key or "")
 
     jsonResponse = json.dumps(testResponse)
 
@@ -65,7 +65,7 @@ def test_bye(user_key = None):
 
 @app.route('/chat_room/<user_key>', methods=['DELETE'])
 def test_seeya(user_key = None):
-    testResponse = KakaoManager.LeftFromChatRoom(user_key)
+    testResponse = KakaoManager.LeftFromChatRoom(user_key or "")
 
     jsonResponse = json.dumps(testResponse)
 
@@ -78,10 +78,10 @@ def test_seeya(user_key = None):
 
 @app.route('/slack/message', methods=['POST'])
 def test_slack():
-    userName = request.form.get('user_name')
-    channelName = request.form.get('channel_name')
-    channelId = request.form.get('channel_id')
-    text = request.form.get('text')
+    userName = request.form.get('user_name') or ""
+    channelName = request.form.get('channel_name') or ""
+    channelId = request.form.get('channel_id') or ""
+    text = request.form.get('text') or ""
 
     testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
