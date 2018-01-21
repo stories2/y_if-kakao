@@ -1,14 +1,11 @@
 from flask import Flask
 import json
-import os
 from flask import request, Response
-from slackclient import SlackClient
+from slacker import Slacker
 
 app = Flask(__name__)
 
-SLACK_WEBHOOK_SECRET = os.environ.get('Sxn1Qdkv67S0LvyQtlscINkP')
-SLACK_TOKEN = os.environ.get('xoxb-302203814914-4wGFVVT6T9HxGgaPWzKk2pl7')
-slackClient = SlackClient(SLACK_TOKEN)
+SLACK_TOKEN = '' # Slack api -> Features -> Oauth & Permission
 
 @app.route('/')
 def hello_world():
@@ -135,7 +132,10 @@ def test_slack():
     channelName = request.form.get('channel_name')
     channelId = request.form.get('channel_id')
     text = request.form.get('text')
-    slackClient.api_call('chat.postMessage', channel = channelId, text = text, userName = 'test')
+    # slackClient.api_call('chat.postMessage', channel = channelId, text = text, userName = 'test')
+    slack = Slacker(SLACK_TOKEN)
+    slack.chat.post_message('#general', 'userName: ' + userName + ' channelName: ' + channelName +
+                                        ' channelId: ' + channelId + ' text: ' + text)
     return Response(), 200
 
 
