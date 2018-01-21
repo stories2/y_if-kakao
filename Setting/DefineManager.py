@@ -1,0 +1,7 @@
+LOG_LEVEL_VERBOSE = 1
+LOG_LEVEL_INFO = 2
+LOG_LEVEL_DEBUG = 3
+LOG_LEVEL_WARN = 4
+LOG_LEVEL_ERROR = 5
+
+SLACK_TOKEN = '' # Slack api -> Features -> Oauth & Permission

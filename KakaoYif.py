@@ -2,10 +2,10 @@ from flask import Flask
 import json
 from flask import request, Response
 from slacker import Slacker
+from Setting import DefineManager
+from Platforms import KakaoManager, SlackManager
 
 app = Flask(__name__)
-
-SLACK_TOKEN = '' # Slack api -> Features -> Oauth & Permission
 
 @app.route('/')
 def hello_world():
@@ -132,9 +132,11 @@ def test_slack():
     channelName = request.form.get('channel_name')
     channelId = request.form.get('channel_id')
     text = request.form.get('text')
-    # slackClient.api_call('chat.postMessage', channel = channelId, text = text, userName = 'test')
-    slack = Slacker(SLACK_TOKEN)
-    slack.chat.post_message('#general', 'userName: ' + userName + ' channelName: ' + channelName +
+
+    SlackManager.MessageReceived(userName, channelName, channelId, text)
+
+    slack = Slacker(DefineManager.SLACK_TOKEN)
+    slack.chat.post_message('#' + channelName, 'userName: ' + userName + ' channelName: ' + channelName +
                                         ' channelId: ' + channelId + ' text: ' + text)
     return Response(), 200
 
