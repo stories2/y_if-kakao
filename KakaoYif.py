@@ -83,6 +83,11 @@ def test_slack():
     channelId = request.form.get('channel_id')
     text = request.form.get('text')
 
+    order = request.args.get('order')
+
+    if order != None:
+        text = order + DefineManager.ORDER_SEPERATE_CHARACTER + DefineManager.ORDER_SEPERATE_CHARACTER + text
+
     testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
     slack = Slacker(DefineManager.SLACK_TOKEN)

@@ -5,7 +5,7 @@ import re
 
 def ExecuteOrder(orderDic):
     orderArgs = []
-    orderArgs = orderDic["text"].split("  ")
+    orderArgs = orderDic["text"].split(DefineManager.ORDER_SEPERATE_CHARACTER + DefineManager.ORDER_SEPERATE_CHARACTER)
     orderArgs[DefineManager.ORDER_SAVED_POINT] = re.sub("[?|<|>|?|:|/|!]", "", orderArgs[DefineManager.ORDER_SAVED_POINT]) #orderArgs[DefineManager.ORDER_SAVED_POINT].replace("!", "")
     LogManager.PrintLogMessage("ProcessManager", "ExecuteOrder", "execute order args: " + " | ".join(orderArgs), DefineManager.LOG_LEVEL_INFO)
     if orderArgs[DefineManager.ORDER_SAVED_POINT] == "translate":
