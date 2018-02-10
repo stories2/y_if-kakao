@@ -4,7 +4,7 @@ from Utils import ResponseManager, LogManager
 
 def OriginLanguageToTargetLanguage(text = '', dest = 'en'):
     translator = Translator()
-    result = translator.translate('안녕하세요.', dest=dest)
+    result = translator.translate(text, dest=dest)
 
     resultDic = {}
     resultDic["src"] = result.src

@@ -8,6 +8,7 @@ kill <yif root process>
 ```
 
 ## Nginx conf
+* `/etc/nginx/sites-available/default`
 
 ```
 server {
@@ -22,6 +23,8 @@ server {
 ```
 
 ## Init script
+
+* `/etc/init/yif.conf`
 
 ```
 description "This is y-if service init script"
