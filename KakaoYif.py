@@ -93,7 +93,8 @@ def test_slack():
 
     if token != None:
         slack = Slacker(token)
-    slack = Slacker(DefineManager.SLACK_TOKEN)
+    else:
+        slack = Slacker(DefineManager.SLACK_TOKEN)
     slack.chat.post_message('#' + channelName, text = None, attachments = [testResponse])
     return Response(), 200
 
