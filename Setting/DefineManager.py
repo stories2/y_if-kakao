@@ -10,3 +10,5 @@ SLACK_TOKEN = '' # Slack api -> Features -> Oauth & Permission
 
 SIMPLE_RESPONSE = 0
 URL_ADDED_RESPONSE = 1
+
+ORDER_SAVED_POINT = 0

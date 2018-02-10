@@ -1,4 +1,4 @@
-from Core import SystemManager
+from Core import ProcessManager
 from Setting import DefineManager
 from Utils import LogManager
 
@@ -7,7 +7,14 @@ def MessageReceived(userName, channelName, channelId, text):
                                " channelId: " + channelId + " text: " + text, DefineManager.LOG_LEVEL_INFO)
     text = "userName: " + userName + " channelName: " + channelName + " channelId: " + channelId + " text: " + text
 
-    coreResponse = SystemManager.Echo(text)
+    dataDic = {}
+    dataDic["userName"] = userName
+    dataDic["channelName"] = channelName
+    dataDic["channelId"] = channelId
+    dataDic["text"] = text
+    dataDic["input"] = "slack"
+
+    coreResponse = ProcessManager.ExecuteOrder(dataDic)#SystemManager.Echo(text)
     testResponse = {}
     if coreResponse["type"] == DefineManager.SIMPLE_RESPONSE:
         testResponse["pretext"] = coreResponse["data"]

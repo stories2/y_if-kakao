@@ -1,6 +1,6 @@
 from Setting import DefineManager
 from Utils import LogManager
-from Core import SystemManager
+from Core import ProcessManager
 
 def InitKeyboard():
     LogManager.PrintLogMessage("KakaoManager", "InitKeyboard", "init user keyboard", DefineManager.LOG_LEVEL_INFO)
@@ -12,7 +12,13 @@ def InitKeyboard():
 def MessageReceived(userKey, content, type):
     LogManager.PrintLogMessage("KakaoManager", "MessageReceived", "userKey: " + userKey + " content: " + content + " type: " + type, DefineManager.LOG_LEVEL_INFO)
     text = "userKey: " + userKey + " content: " + content + " type: " + type
-    coreResponse = SystemManager.Echo(text)
+
+    dataDic = {}
+    dataDic["userKey"] = userKey
+    dataDic["type"] = type
+    dataDic["text"] = content
+    dataDic["input"] = "kakao"
+    coreResponse = ProcessManager.ExecuteOrder(dataDic)#SystemManager.Echo(text)
 
     testResponse = {}
     testMessage = {}
