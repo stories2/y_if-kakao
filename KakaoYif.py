@@ -84,12 +84,15 @@ def test_slack():
     text = request.form.get('text')
 
     order = request.args.get('order')
+    token = request.args.get('token')
 
     if order != None:
         text = order + DefineManager.ORDER_SEPERATE_CHARACTER + DefineManager.ORDER_SEPERATE_CHARACTER + text
 
     testResponse = SlackManager.MessageReceived(userName, channelName, channelId, text)
 
+    if token != None:
+        slack = Slacker(token)
     slack = Slacker(DefineManager.SLACK_TOKEN)
     slack.chat.post_message('#' + channelName, text = None, attachments = [testResponse])
     return Response(), 200
