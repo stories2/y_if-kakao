@@ -5,7 +5,7 @@ from Utils import LogManager
 def MessageReceived(userName, channelName, channelId, text):
     LogManager.PrintLogMessage("SlackManager", "MessageReceived", "userName: " + userName + " channelName: " + channelName +
                                " channelId: " + channelId + " text: " + text, DefineManager.LOG_LEVEL_INFO)
-    text = "userName: " + userName + " channelName: " + channelName + " channelId: " + channelId + " text: " + text
+    # text = "userName: " + userName + " channelName: " + channelName + " channelId: " + channelId + " text: " + text
 
     dataDic = {}
     dataDic["userName"] = userName
